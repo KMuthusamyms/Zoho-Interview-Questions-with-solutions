@@ -1,0 +1,44 @@
+// "static void main" must be defined in a public class.
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String num = scan.next();
+        List<Integer> list = new ArrayList<Integer>();
+        permute(num , 0 , num.length()-1 , list);
+       System.out.println(Collections.max(list));
+    }
+    public static void permute(String str , int l, int r , List<Integer> list){
+        if(l == r){
+            // System.out.println(str);
+           if(isPrime(Integer.parseInt(str))){
+               list.add(Integer.parseInt(str));
+               
+           }
+        }else{
+            for(int i = l ; i <= r ; i++){
+                str =  swap(str , l ,i , list);
+                permute(str , l+1 , r , list);
+                str = swap(str , l ,i , list);
+            }
+        }
+    }
+    public static String swap(String s, int x , int y, List<Integer> list){
+        char[] arr = s.toCharArray();
+        char temp = arr[x];
+        arr[x] = arr[y];
+        arr[y] = temp;
+        return String.valueOf(arr);
+    }
+    public static boolean isPrime(int number){
+        if(number <= 1){
+            return false;
+        }
+         for(int i = 2 ; i < number ; i++){
+                if(number % i == 0){
+                    return false;
+                }
+         }
+        return true;
+    }
+
+}
